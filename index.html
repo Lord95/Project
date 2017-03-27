@@ -42,23 +42,6 @@
                 wWorld         = undefined,
                 wBall          = undefined;
 
-	function onDocumentTouchStart(event) {
-                if (event.touches.length === 1) {
-                    event.preventDefault();
-                    mouseXOnMouseDown = event.touches[ 0 ].pageX - windowHalfX;
-                    targetRotationOnMouseDown = targetRotation;
-                }
-            }
-
-            function onDocumentTouchMove(event) {
-                if (event.touches.length === 1) {
-                    event.preventDefault();
-                    mouseX = event.touches[ 0 ].pageX - windowHalfX;
-                    targetRotation = targetRotationOnMouseDown + ( mouseX - mouseXOnMouseDown ) * 0.05;
-		    keyAxis = [1,0];
-                }
-            }
-
             function createPhysicsWorld() {
                 // Create the world object.
                 wWorld = new b2World(new b2Vec2(0, 0), true);
@@ -312,17 +295,12 @@
                 renderer = new THREE.WebGLRenderer();
                 renderer.setSize(window.innerWidth, window.innerHeight);
                 document.body.appendChild(renderer.domElement);
-		
-		document.addEventListener( 'touchstart', onDocumentTouchStart, false );
-		document.addEventListener( 'touchmove', onDocumentTouchMove, false );
-		window.addEventListener( 'resize', onResize, false );
-		    
+				    
                 // Bind keyboard and resize events.
                 KeyboardJS.bind.axis('left', 'right', 'down', 'up', onMoveKey);
                 KeyboardJS.bind.axis('h', 'l', 'j', 'k', onMoveKey);
                 $(window).resize(onResize);
                 
-
                 // Set the initial game state.
                 gameState = 'initialize';
                 
