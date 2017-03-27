@@ -17,6 +17,8 @@ function generateSquareMaze(dimension) {
                 directions.push([0, 1]);
             }
             if(directions.length == 0) {
+                //var n = Math.floor(Math.random()*dimension);
+                field[dimension-1][2]= false;
                 return field;
             }
             dir = directions[Math.floor(Math.random()*directions.length)];
