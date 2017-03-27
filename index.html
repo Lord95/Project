@@ -42,30 +42,21 @@
                 wWorld         = undefined,
                 wBall          = undefined;
 
-		function onDocumentTouchStart( event ) {
-
-                if ( event.touches.length === 1 ) {
-
+	function onDocumentTouchStart(event) {
+                if (event.touches.length === 1) {
                     event.preventDefault();
-
                     mouseXOnMouseDown = event.touches[ 0 ].pageX - windowHalfX;
                     targetRotationOnMouseDown = targetRotation;
-
                 }
-
             }
 
-            function onDocumentTouchMove( event ) {
-
-                if ( event.touches.length === 1 ) {
-
+            function onDocumentTouchMove(event) {
+                if (event.touches.length === 1) {
                     event.preventDefault();
-
                     mouseX = event.touches[ 0 ].pageX - windowHalfX;
                     targetRotation = targetRotationOnMouseDown + ( mouseX - mouseXOnMouseDown ) * 0.05;
-
+		    keyAxis = [1,0];
                 }
-
             }
 
             function createPhysicsWorld() {
@@ -271,6 +262,8 @@
 
 
             function onResize() {
+		windowHalfX = window.innerWidth / 2;
+		windowHalfY = window.innerHeight / 2;
                 renderer.setSize(window.innerWidth, window.innerHeight);
                 camera.aspect = window.innerWidth/window.innerHeight;
                 camera.updateProjectionMatrix();
@@ -322,6 +315,8 @@
 		
 		document.addEventListener( 'touchstart', onDocumentTouchStart, false );
 		document.addEventListener( 'touchmove', onDocumentTouchMove, false );
+		window.addEventListener( 'resize', onResize, false );
+		    
                 // Bind keyboard and resize events.
                 KeyboardJS.bind.axis('left', 'right', 'down', 'up', onMoveKey);
                 KeyboardJS.bind.axis('h', 'l', 'j', 'k', onMoveKey);
