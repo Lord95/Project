@@ -213,8 +213,7 @@
                         updatePhysicsWorld();
                         updateRenderWorld();
                         renderer.render(scene, camera);
-				        document.addEventListener( 'touchstart', onDocumentTouchStart, false );
-				        document.addEventListener( 'touchmove', onDocumentTouchMove, false );
+			
                         // Check for victory.
                         var mazeX = Math.floor(ballMesh.position.x + 0.5);
                         var mazeY = Math.floor(ballMesh.position.y + 0.5);
@@ -310,25 +309,7 @@
                 // Start the game loop.
                 requestAnimationFrame(gameLoop);
 
-            })
-            
-            function onDocumentTouchStart( event ) {
-
-				if ( event.touches.length === 1 ) {
-					event.preventDefault();
-					mouseXOnMouseDown = event.touches[ 0 ].pageX - windowHalfX;
-					targetRotationOnMouseDown = targetRotation;
-				}
-			}
-
-			function onDocumentTouchMove( event ) {
-				if ( event.touches.length === 1 ) {
-					event.preventDefault();
-					mouseX = event.touches[ 0 ].pageX - windowHalfX;
-					targetRotation = targetRotationOnMouseDown + ( mouseX - mouseXOnMouseDown ) * 0.05;
-				}
-			}
-            
+            })            
 
         </script>
     
